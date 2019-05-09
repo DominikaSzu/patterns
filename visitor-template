@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Visitor</title>
+</head>
+<body>
+	<!-- Visitor 
+	Visitor pattern let's you add further operations to objects without having to modify them. The visitor design pattern is a way of separating an algorithm from an object structure on which it operates. A practical result of this separation is the ability to add new operations to existing object structures without modifying those structures. It is one way to follow the open/closed principle. --> 
+</body>
+<script>
+
+// 	class Animal {
+// 		constructor(name, thirst, hunger) {
+// 			this.name = name;
+// 			this.thirst = thirst;
+// 			this.hunger = hunger;
+// 		}
+
+// 		accept(visitor) {
+// 			visitor.operation(this);
+// 		}
+
+// 		get animalName() {
+// 			return this.name;
+// 		}
+
+// 		get thirstLevel() {
+// 			return this.thirst;
+// 		}
+
+// 		get hungerLevel() {
+// 			return this.hunger;
+// 		}
+// 	}
+
+// 	// Visitor 1
+// 	const drink = {
+// 		operation(animal) {
+// 			animal.thirst -= 10;
+// 		}
+// 	}
+
+// 	// Visitor 2
+// 	const eat = {
+// 		operation(animal) {
+// 			animal.hunger -= 10;
+// 		}
+// 	}
+
+// const hamster = new Animal('Hamster', 100, 100);
+
+// console.log(hamster);
+// hamster.accept(eat);
+// console.log(hamster);
+// hamster.accept(drink);
+// console.log(hamster);
+
+
+class Employee {
+	constructor(name, salary, vacation) {
+    	this.name = name;
+    	this.salary = salary;
+    	this.vacation = vacation;
+     }
+
+    accept(visitor) {
+        visitor.operation(this);
+    };
+ 
+    get employeeName() {
+        return this.name;
+    };
+ 
+    get employeeSalary() {
+        return this.salary;
+    };
+ 
+    set newSalary(sal) {
+        this.salary = sal;
+    };
+ 
+    get employeeVacation() {
+        return this.vacation;
+    };
+ 
+    set newVacation(vac) {
+        this.vacation = vac;
+    };
+};
+ 	// Visitor nr 1
+	const extraSalary = {
+		operation(emp) {
+		    emp.newSalary = emp.employeeSalary * 1.1;
+		}
+    }
+
+    const extraVacation = {
+    	operation(emp) {
+		    emp.newVacation = emp.employeeVacation + 2;
+    	}
+	}
+
+const employees = [
+        new Employee("John", 10000, 10),
+        new Employee("Mary", 20000, 21),
+        new Employee("Boss", 250000, 51)
+    ];
+
+employees.map(employee => employee.accept(extraVacation));
+employees.map(employee => employee.accept(extraSalary))
+console.log(employees);
+
+// Template 
+//	The Template Method Pattern defines the skeleton of an algorithm in a method, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
+	class Pet {
+		constructor(name) {
+			this.name = name
+		}
+
+		introduceYourself() {
+			return `Hi, i'm ${this.name}.`;
+		}
+
+		play() {
+			return `I'm having fun when I ${this.haveFun()}.`;
+			// this should be implemented by subclass
+		}
+
+		speak() {
+			return `I do ${this.speech()}.`;
+		}
+	}
+
+	class Dog extends Pet {
+		constructor(name) {
+			super(name);
+		}
+
+		haveFun() {
+			return `fetch the ball`;
+		}
+
+		speech() {
+			return `hau hau`;
+		}
+	}
+
+	class Cat extends Pet {
+		constructor(name) {
+			super(name);
+		}
+
+		haveFun() {
+			return `ignore you`;
+		}
+		speech() {
+			return `miau miau`;
+		}
+	}
+	
+	const mambo = new Cat('Mambo');
+	const harry = new Dog('Harry');
+	console.log(mambo.play());
+	console.log(harry.play());
+	console.log(mambo.speak());
+	console.log(harry.speak());
+
+
+// 	class Datastore {
+		// constructor() {
+		// }
+//     process() {
+//         this.connect();
+//         this.select();
+//         this.disconnect();
+//         return true;
+//     }
+// };
+ 
+// class mySql extends Datastore {
+//     connect() {
+//         console.log("MySQL: connect step");
+//     };
+ 
+//     select() {
+//         console.log("MySQL: select step");
+//     };
+ 
+//     disconnect() {
+//         console.log("MySQL: disconnect step");
+//     };
+// }
+
+// const database1 = new mySql();
+// database1.process();
+    
+</script>
+</html>
